@@ -1,4 +1,4 @@
-package geekbrains.couse2;
+package geekbrains.couse3;
 
 public class Frut  {
     float weight;
