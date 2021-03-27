@@ -5,6 +5,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
+
 public class ClientHandler {
     private String nickname;
     private Server server;
@@ -16,7 +17,7 @@ public class ClientHandler {
         return nickname;
     }
 
-    public ClientHandler(Server server, Socket socket) {
+    public ClientHandler(Server server, Socket socket){
         try {
             this.server = server;
             this.socket = socket;
@@ -26,10 +27,11 @@ public class ClientHandler {
                 try {
                     while (true) {
                         String msg = in.readUTF();
-                        // /auth login1 pass1
+                        // /auth LOG1 PASS1, LOG2 PASS2
                         if (msg.startsWith("/auth ")) {
                             String[] tokens = msg.split("\\s");
-                            String nick = server.getAuthService().getNicknameByLoginAndPassword(tokens[1], tokens[2]);
+                            String nick = server.AuthService.getNicknameByLoginAndPassword(tokens[1], tokens[2]);
+                            System.out.println("nick = " + nick);//
                             if (nick != null && !server.isNickBusy(nick)) {
                                 sendMsg("/authok " + nick);
                                 nickname = nick;

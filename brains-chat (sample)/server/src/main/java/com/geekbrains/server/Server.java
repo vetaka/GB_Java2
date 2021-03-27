@@ -5,25 +5,22 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Vector;
 
-public class Server {
-    private Vector<ClientHandler> clients;
-    private AuthService authService;
+public class Server  {
 
-    public AuthService getAuthService() {
-        return authService;
-    }
+    public AuthService AuthService;
+    private Vector<ClientHandler> clients;
 
     public Server() {
         clients = new Vector<>();
-        authService = new SimpleAuthService();
+        AuthService = new DBAuthService();
         try (ServerSocket serverSocket = new ServerSocket(8189)) {
             System.out.println("Сервер запущен на порту 8189");
             while (true) {
                 Socket socket = serverSocket.accept();
-                new ClientHandler(this, socket);
+                ClientHandler clientHandler = new ClientHandler(this, socket);//, connection);
                 System.out.println("Подключился новый клиент");
             }
-        } catch (IOException e) {
+                } catch (IOException e) {
             e.printStackTrace();
         }
         System.out.println("Сервер завершил свою работу");
@@ -52,6 +49,7 @@ public class Server {
 
     public void subscribe(ClientHandler clientHandler) {
         clients.add(clientHandler);
+        System.out.println("clientHandler = " + clientHandler);
         broadcastClientsList();
     }
 
@@ -84,4 +82,6 @@ public class Server {
             o.sendMsg(out);
         }
     }
+
+
 }
