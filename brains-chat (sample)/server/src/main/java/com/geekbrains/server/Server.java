@@ -4,25 +4,34 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Vector;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Server  {
 
     public AuthService AuthService;
     private Vector<ClientHandler> clients;
+    private ExecutorService executorService;
 
     public Server() {
         clients = new Vector<>();
         AuthService = new DBAuthService();
+        executorService = Executors.newCachedThreadPool();
+
         try (ServerSocket serverSocket = new ServerSocket(8189)) {
             System.out.println("Сервер запущен на порту 8189");
             while (true) {
                 Socket socket = serverSocket.accept();
-                ClientHandler clientHandler = new ClientHandler(this, socket);//, connection);
+                ClientHandler clientHandler = new ClientHandler(this, socket, executorService);
                 System.out.println("Подключился новый клиент");
             }
                 } catch (IOException e) {
             e.printStackTrace();
         }
+        finally {
+            executorService.shutdown();
+        }
+
         System.out.println("Сервер завершил свою работу");
     }
 
