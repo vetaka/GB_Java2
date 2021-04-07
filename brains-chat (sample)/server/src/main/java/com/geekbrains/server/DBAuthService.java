@@ -9,9 +9,14 @@ public class DBAuthService implements AuthService{
 
     static {
         try {
+<<<<<<< Updated upstream
             Class.forName("org.sqlite.JDBC");
             connection = DriverManager.getConnection(DB_CONNECTION);
         } catch (SQLException | ClassNotFoundException throwables) {
+=======
+            connection = DriverManager.getConnection(DB_CONNECTION);
+        } catch (SQLException throwables) {
+>>>>>>> Stashed changes
             throwables.printStackTrace();
         }
     }

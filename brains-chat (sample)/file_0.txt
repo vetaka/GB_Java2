@@ -1,0 +1,11 @@
+FINE com.geekbrains.server.ClientHandler->
+ Server is started.FINE com.geekbrains.server.ClientHandler->
+ Client NIK1 is coming to chat.FINE com.geekbrains.server.ClientHandler->
+ Client send message.FINE com.geekbrains.server.ClientHandler->
+ Client send message.FINE com.geekbrains.server.ClientHandler->
+ Client send message.FINE com.geekbrains.server.ClientHandler->
+ Client send message.FINE com.geekbrains.server.ClientHandler->
+ Server is started.FINE com.geekbrains.server.ClientHandler->
+ Client NIK2 is coming to chat.FINE com.geekbrains.server.ClientHandler->
+ Client send message.FINE com.geekbrains.server.ClientHandler->
+ Client send message.
